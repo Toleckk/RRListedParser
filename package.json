@@ -1,6 +1,6 @@
 {
   "name": "rr-listed-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
@@ -9,24 +9,20 @@
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/polyfill": "^7.2.5",
-    "@babel/preset-env": "^7.3.4"
+    "@babel/plugin-proposal-class-properties": "^7.3.4"
   },
   "babel": {
-    "presets": [
-      [
-        "@babel/preset-env",
-        {
-          "useBuiltIns": "usage"
-        }
-      ]
-    ],
     "plugins": [
-      "@babel/plugin-proposal-class-properties"
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-syntax-async-generators",
+      "@babel/plugin-proposal-async-generator-functions"
     ]
   },
   "scripts": {
     "babel": "babel src --out-dir lib"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
+    "@babel/plugin-syntax-async-generators": "^7.2.0"
   }
 }
