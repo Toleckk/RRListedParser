@@ -1,4 +1,3 @@
 .idea
-*.bundle.js
-webpack.config.js
-yarn.lock
+lib
+node_modules
