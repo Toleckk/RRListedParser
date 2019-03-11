@@ -1,6 +1,6 @@
 {
   "name": "rr-listed-parser",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "license": "MIT",
   "main": "lib/index.js",
   "files": [
@@ -10,7 +10,6 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/plugin-proposal-async-generator-functions": "^7.2.0",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
     "@babel/plugin-proposal-optional-catch-binding": "^7.2.0",
     "@babel/plugin-syntax-async-generators": "^7.2.0",
     "@babel/plugin-transform-dotall-regex": "^7.2.0"
@@ -20,7 +19,6 @@
   },
   "babel": {
     "plugins": [
-      "@babel/plugin-proposal-class-properties",
       "@babel/plugin-syntax-async-generators",
       "@babel/plugin-proposal-async-generator-functions",
       "@babel/plugin-transform-dotall-regex",
