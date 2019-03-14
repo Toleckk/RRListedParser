@@ -11,28 +11,43 @@ class ListedParser {
     }
 
     async parseAll() {
-        const result = [];
-        for await (const id of this.generateAll())
-            result.push(id);
-        return result;
+        for(let page = 0, result = []; ; ++page)
+            try {
+                for (const profile of await this.parsePage(page))
+                    result.push(profile);
+            } catch {
+                return result;
+            }
     };
 
     async* generateAll() {
         try {
             for (let page = 0; ; ++page)
-                for (const id of await this.parse(page)) {
+                for (const id of await this.parsePage(page)) {
                     await delay(this.delay);
                     yield id;
                 }
-        } catch {/*STUB: generating finished*/}
+        } catch {/*STUB: generating finished*/
+        }
     };
 
-    parse = async page => ListedParser.table(await $.get(this.makeLink(page)))
-        .match(/<tr.*?>.*?<\/tr>/sg)
-        .map(row => row.match(/<td action=".*?(\d+)"/)[1]);
+    async parsePage(page) {
+        const response = await $.get(this.makeLink(page));
+        return ListedParser.table(response)
+            .match(/<tr.*?>.*?<\/tr>/sg)
+            .map(this.parseRow);
+    }
+
+    parseRow(row) {
+        try {
+            return row.match(/<td action=".*?(\d+)"/)[1];
+        } catch {
+            return null;
+        }
+    }
 
     makeLink(page) {
-        if (this.link.match("residency"))
+        if (this.link.match("residency") || this.link.match(/\/region\//))
             return this.link + (page ? `/0/${page * 25}` : `?c=${c_html}`);
         return this.link + (page ? `/${page * 25}` : `?c=${c_html}`);
     };
